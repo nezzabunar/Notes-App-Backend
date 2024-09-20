@@ -1,33 +1,27 @@
 const { nanoid } = require('nanoid');
 const notes = require('./notes');
 
-const getAllNotesHandler = () => ({
-  status: 'success',
-  data: {
-    notes,
-  },
-});
+const addNoteHandler = (request, h) => {
+  const { title = 'untitled', tags, body } = request.payload;
 
-const addNotesHandler = (request, h) => {
-  const { title, tag, body } = request.payload;
   const id = nanoid(16);
   const createdAt = new Date().toISOString();
   const updatedAt = createdAt;
 
   const newNote = {
-    title, tag, body, id, createdAt, updatedAt
+    title, tags, body, id, createdAt, updatedAt,
   };
 
   notes.push(newNote);
 
-  const issuccess = notes.filter((notes) => notes.id === id).length > 0;
+  const isSuccess = notes.filter((note) => note.id === id).length > 0;
 
-  if (issuccess) {
+  if (isSuccess) {
     const response = h.response({
       status: 'success',
       message: 'Catatan berhasil ditambahkan',
       data: {
-        nodeId: id,
+        noteId: id,
       },
     });
     response.code(201);
@@ -36,29 +30,36 @@ const addNotesHandler = (request, h) => {
 
   const response = h.response({
     status: 'fail',
-    message: 'Catatan gagal ditambahkan'
+    message: 'Catatan gagal ditambahkan',
   });
   response.code(500);
   return response;
 };
+
+const getAllNotesHandler = () => ({
+  status: 'success',
+  data: {
+    notes,
+  },
+});
 
 const getNoteByIdHandler = (request, h) => {
   const { id } = request.params;
 
   const note = notes.filter((n) => n.id === id)[0];
 
-  if (note !== undefined){
+  if (note !== undefined) {
     return {
       status: 'success',
       data: {
         note,
-      }
+      },
     };
   }
 
   const response = h.response({
     status: 'fail',
-    message: 'Catatan tidak ditemukan'
+    message: 'Catatan tidak ditemukan',
   });
   response.code(404);
   return response;
@@ -121,8 +122,9 @@ const deleteNoteByIdHandler = (request, h) => {
 };
 
 module.exports = {
-  addNotesHandler,
+  addNoteHandler,
   getAllNotesHandler,
   getNoteByIdHandler,
   editNoteByIdHandler,
-  deleteNoteByIdHandler };
+  deleteNoteByIdHandler,
+};
