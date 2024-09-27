@@ -1,10 +1,9 @@
-const { ClientError } = require("../../exceptions/ClientError");
+const { ClientError } = require('../../exceptions/ClientError');
 
 class NotesHandler {
   constructor(service, validator) {
     this._service = service;
     this._validator = validator;
-        
     this.postNoteHandler = this.postNoteHandler.bind(this);
     this.getNotesHandler = this.getNotesHandler.bind(this);
     this.getNoteByIdHandler = this.getNoteByIdHandler.bind(this);
@@ -52,9 +51,8 @@ class NotesHandler {
   // postNoteHandler(request, h) {
   //   this._validator.validateNotePayload(request.payload);
   //   const { title = 'untitled', body, tags } = request.payload;
-  
   //   const noteId = this._service.addNote({ title, body, tags });
-  
+
   //   const response = h.response({
   //     status: 'success',
   //     message: 'Catatan berhasil ditambahkan',
