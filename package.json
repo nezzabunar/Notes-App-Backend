@@ -14,7 +14,6 @@
   "license": "ISC",
   "devDependencies": {
     "@eslint/js": "^9.11.1",
-    "eslint": "^9.11.1",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.29.0",
     "globals": "^15.9.0",
@@ -22,8 +21,10 @@
   },
   "dependencies": {
     "@hapi/hapi": "^21.3.2",
+    "@hapi/jwt": "^3.2.0",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
+    "eslint": "^9.11.1",
     "eslint-config-dicodingacademy": "^0.9.4",
     "joi": "^17.13.3",
     "nanoid": "^3.1.20",
