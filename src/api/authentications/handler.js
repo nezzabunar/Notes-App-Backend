@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 class AuthenticationsHandler {
   constructor(authenticationsService, usersService, tokenManager, validator) {
     this._authenticationsService = authenticationsService;
@@ -33,7 +34,7 @@ class AuthenticationsHandler {
     return response;
   }
 
-  async putAuthenticationHandler(request) {
+  async putAuthenticationHandler(request, h) {
     this._validator.validatePutAuthenticationPayload(request.payload);
 
     const { refreshToken } = request.payload;
@@ -50,7 +51,7 @@ class AuthenticationsHandler {
     };
   }
 
-  async deleteAuthenticationHandler(request) {
+  async deleteAuthenticationHandler(request, h) {
     this._validator.validateDeleteAuthenticationPayload(request.payload);
 
     const { refreshToken } = request.payload;
@@ -62,8 +63,6 @@ class AuthenticationsHandler {
       message: 'Refresh token berhasil dihapus',
     };
   }
-
-
 }
 
 module.exports = { AuthenticationsHandler };

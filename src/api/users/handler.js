@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 class UsersHandler {
   constructor(service, validator) {
     this._service = service;
@@ -24,7 +25,7 @@ class UsersHandler {
     return response;
   }
 
-  async getUserByIdHandler(request) {
+  async getUserByIdHandler(request, h) {
     const { id } = request.params;
     const user = await this._service.getUserById(id);
     return {
